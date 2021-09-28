@@ -71,3 +71,22 @@ test("subtracts from player's health", () => {
       expect(player.getAttackValue()).toBeGreaterThanOrEqual(5);
       expect(player.getAttackValue()).toBeLessThanOrEqual(15);
   });
+
+   test ("adds potion to the player's inventory", () => {
+       const player = new Player('Dave'); 
+       const oldCount = player.inventory.length;
+
+       player.addPotion(new Potion());
+
+       expect(player.inventory.length).toBeGreaterThan(oldCount);
+   });
+
+   test ('uses potion from inventory', () => {
+       const player = new Player('Dave');
+       player.inventory = [new Potion(), new Potion(), new Potion()];
+       const oldCount = player.inventory.length;
+
+       player.usePotion(1);
+
+       expect(player.inventory.length).toBeLessThan(oldCount);
+   });
